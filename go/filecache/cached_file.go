@@ -74,3 +74,8 @@ func NewCachedFile(asset *os.File, cacheFile bool) (*CachedFile, error) {
 func (cf *CachedFile) GetHeaders() []string {
 	return cf.desc.GetHeaders()
 }
+
+// GetSHA256 returns the SHA256 hash of the underlying content
+func (cf *CachedFile) GetSHA256() string {
+	return cf.desc.GetContentHash()
+}

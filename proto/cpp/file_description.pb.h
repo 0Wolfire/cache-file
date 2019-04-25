@@ -168,11 +168,26 @@ class Description : public ::google::protobuf::Message /* @@protoc_insertion_poi
   const ::google::protobuf::RepeatedPtrField< ::std::string>& headers() const;
   ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_headers();
 
+  // string content_hash = 2;
+  void clear_content_hash();
+  static const int kContentHashFieldNumber = 2;
+  const ::std::string& content_hash() const;
+  void set_content_hash(const ::std::string& value);
+  #if LANG_CXX11
+  void set_content_hash(::std::string&& value);
+  #endif
+  void set_content_hash(const char* value);
+  void set_content_hash(const char* value, size_t size);
+  ::std::string* mutable_content_hash();
+  ::std::string* release_content_hash();
+  void set_allocated_content_hash(::std::string* content_hash);
+
   // @@protoc_insertion_point(class_scope:description.Description)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::RepeatedPtrField< ::std::string> headers_;
+  ::google::protobuf::internal::ArenaStringPtr content_hash_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_file_5fdescription_2eproto::TableStruct;
 };
@@ -254,6 +269,59 @@ inline ::google::protobuf::RepeatedPtrField< ::std::string>*
 Description::mutable_headers() {
   // @@protoc_insertion_point(field_mutable_list:description.Description.headers)
   return &headers_;
+}
+
+// string content_hash = 2;
+inline void Description::clear_content_hash() {
+  content_hash_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& Description::content_hash() const {
+  // @@protoc_insertion_point(field_get:description.Description.content_hash)
+  return content_hash_.GetNoArena();
+}
+inline void Description::set_content_hash(const ::std::string& value) {
+  
+  content_hash_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:description.Description.content_hash)
+}
+#if LANG_CXX11
+inline void Description::set_content_hash(::std::string&& value) {
+  
+  content_hash_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:description.Description.content_hash)
+}
+#endif
+inline void Description::set_content_hash(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  content_hash_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:description.Description.content_hash)
+}
+inline void Description::set_content_hash(const char* value, size_t size) {
+  
+  content_hash_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:description.Description.content_hash)
+}
+inline ::std::string* Description::mutable_content_hash() {
+  
+  // @@protoc_insertion_point(field_mutable:description.Description.content_hash)
+  return content_hash_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Description::release_content_hash() {
+  // @@protoc_insertion_point(field_release:description.Description.content_hash)
+  
+  return content_hash_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Description::set_allocated_content_hash(::std::string* content_hash) {
+  if (content_hash != NULL) {
+    
+  } else {
+    
+  }
+  content_hash_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), content_hash);
+  // @@protoc_insertion_point(field_set_allocated:description.Description.content_hash)
 }
 
 #ifdef __GNUC__

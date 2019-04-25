@@ -60,7 +60,10 @@ func main() {
 			panic(err)
 		}
 
-		desc := &description.Description{Headers: toApply}
+		// Get the hash of the content and make the descriptor
+		h := sha256.New()
+		h.Write(content)
+		desc := &description.Description{Headers: toApply, ContentHash: fmt.Sprintf("%X", h.Sum(nil))}
 		descBytes, err := desc.Marshal()
 		if err != nil {
 			panic(err)
@@ -73,7 +76,7 @@ func main() {
 		output = append(output, content...)
 
 		// Get the hash of output and write it to disk
-		h := sha256.New()
+		h = sha256.New()
 		h.Write(output)
 		actualHash := fmt.Sprintf("%X", h.Sum(nil))
 

@@ -44,6 +44,7 @@ func main() {
 		}
 
 		fmt.Printf("Headers: %s\n", strings.Join(cached.GetHeaders(), ","))
+		fmt.Printf("Content SHA256: %s\n", cached.GetSHA256())
 		fmt.Printf("Content: %s\n", string(content))
 	}
 }
