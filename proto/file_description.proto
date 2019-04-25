@@ -1,0 +1,8 @@
+syntax = "proto3";
+package description;
+option go_package = "proto/go/description";
+
+message Description {
+	string content_hash = 1; // The hash of the content in the actual file below this description
+	repeated string headers = 2; // HTTP headers of the response
+}
