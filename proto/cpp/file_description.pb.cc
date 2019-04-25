@@ -53,7 +53,6 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::description::Description, content_hash_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::description::Description, headers_),
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
@@ -85,13 +84,13 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\026file_description.proto\022\013description\"4\n"
-      "\013Description\022\024\n\014content_hash\030\001 \001(\t\022\017\n\007he"
-      "aders\030\002 \003(\tB\026Z\024proto/go/descriptionb\006pro"
-      "to3"
+      "\n\026file_description.proto\022\013description\"\036\n"
+      "\013Description\022\017\n\007headers\030\001 \003(\tB6Z4github."
+      "com/gladiusio/cache-file/proto/go/descri"
+      "ptionb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 123);
+      descriptor, 133);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "file_description.proto", &protobuf_RegisterTypes);
 }
@@ -114,7 +113,6 @@ namespace description {
 void Description::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int Description::kContentHashFieldNumber;
 const int Description::kHeadersFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -130,15 +128,10 @@ Description::Description(const Description& from)
       _internal_metadata_(NULL),
       headers_(from.headers_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  content_hash_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.content_hash().size() > 0) {
-    content_hash_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.content_hash_);
-  }
   // @@protoc_insertion_point(copy_constructor:description.Description)
 }
 
 void Description::SharedCtor() {
-  content_hash_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 Description::~Description() {
@@ -147,7 +140,6 @@ Description::~Description() {
 }
 
 void Description::SharedDtor() {
-  content_hash_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void Description::SetCachedSize(int size) const {
@@ -171,7 +163,6 @@ void Description::Clear() {
   (void) cached_has_bits;
 
   headers_.Clear();
-  content_hash_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
 
@@ -185,26 +176,10 @@ bool Description::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string content_hash = 1;
+      // repeated string headers = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_content_hash()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->content_hash().data(), static_cast<int>(this->content_hash().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "description.Description.content_hash"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated string headers = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->add_headers()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -244,24 +219,14 @@ void Description::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string content_hash = 1;
-  if (this->content_hash().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->content_hash().data(), static_cast<int>(this->content_hash().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "description.Description.content_hash");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->content_hash(), output);
-  }
-
-  // repeated string headers = 2;
+  // repeated string headers = 1;
   for (int i = 0, n = this->headers_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->headers(i).data(), static_cast<int>(this->headers(i).length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
       "description.Description.headers");
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      2, this->headers(i), output);
+      1, this->headers(i), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -278,25 +243,14 @@ void Description::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string content_hash = 1;
-  if (this->content_hash().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->content_hash().data(), static_cast<int>(this->content_hash().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "description.Description.content_hash");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->content_hash(), target);
-  }
-
-  // repeated string headers = 2;
+  // repeated string headers = 1;
   for (int i = 0, n = this->headers_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->headers(i).data(), static_cast<int>(this->headers(i).length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
       "description.Description.headers");
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteStringToArray(2, this->headers(i), target);
+      WriteStringToArray(1, this->headers(i), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -316,19 +270,12 @@ size_t Description::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // repeated string headers = 2;
+  // repeated string headers = 1;
   total_size += 1 *
       ::google::protobuf::internal::FromIntSize(this->headers_size());
   for (int i = 0, n = this->headers_size(); i < n; i++) {
     total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
       this->headers(i));
-  }
-
-  // string content_hash = 1;
-  if (this->content_hash().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->content_hash());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -359,10 +306,6 @@ void Description::MergeFrom(const Description& from) {
   (void) cached_has_bits;
 
   headers_.MergeFrom(from.headers_);
-  if (from.content_hash().size() > 0) {
-
-    content_hash_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.content_hash_);
-  }
 }
 
 void Description::CopyFrom(const ::google::protobuf::Message& from) {
@@ -390,8 +333,6 @@ void Description::Swap(Description* other) {
 void Description::InternalSwap(Description* other) {
   using std::swap;
   headers_.InternalSwap(CastToBase(&other->headers_));
-  content_hash_.Swap(&other->content_hash_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
