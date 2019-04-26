@@ -12,11 +12,11 @@ import (
 	"github.com/gogo/protobuf/proto"
 )
 
-// CachedFile implements an io.ReadCloser around either a file on disk or cached in RAM depending on which
-// options are set
+// CachedFile processes file descriptions and creates readers for either cached content or the underlying file
 type CachedFile struct {
-	io.ReadCloser
-	desc *description.Description
+	readCloser io.ReadCloser
+	desc       *description.Description
+	contents   []byte
 }
 
 // NewCachedFile returns a CachedFile around the specified asset, and caches the file in
@@ -58,7 +58,7 @@ func NewCachedFile(asset *os.File, cacheFile bool) (*CachedFile, error) {
 
 	// If we're not caching the file we just store the reader around the underlying asset which should now be at our content position
 	if !cacheFile {
-		return &CachedFile{ReadCloser: asset, desc: desc}, nil
+		return &CachedFile{readCloser: asset, desc: desc}, nil
 	}
 
 	// If we are caching we load the rest of the bytes of the asset
@@ -67,7 +67,16 @@ func NewCachedFile(asset *os.File, cacheFile bool) (*CachedFile, error) {
 		return nil, fmt.Errorf("cached file: error reading asset %s: %s", asset.Name(), err.Error())
 	}
 
-	return &CachedFile{ReadCloser: ioutil.NopCloser(bytes.NewReader(content))}, nil
+	return &CachedFile{contents: content, desc: desc}, nil
+}
+
+// GetReadCloser will return the underlying file reader if caching is not enabled,
+// or a new ioutil.NopCloser over the underlying byte array if caching is enabled.
+func (cf *CachedFile) GetReadCloser() io.ReadCloser {
+	if cf.readCloser != nil {
+		return cf.readCloser
+	}
+	return ioutil.NopCloser(bytes.NewReader(cf.contents))
 }
 
 // GetHeaders returns the list of header strings for the response object

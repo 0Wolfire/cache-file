@@ -38,7 +38,7 @@ func main() {
 			panic(err)
 		}
 
-		content, err := ioutil.ReadAll(cached)
+		content, err := ioutil.ReadAll(cached.GetReadCloser())
 		if err != nil {
 			panic(err)
 		}
