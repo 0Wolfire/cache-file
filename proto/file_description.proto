@@ -5,4 +5,5 @@ option go_package = "github.com/gladiusio/cache-file/proto/go/description";
 message Description {
 	repeated string headers = 1; // HTTP headers of the response
 	string content_hash = 2; // Hash of the underlying content
+	string uri = 3; // The route of the asset on the origin: ex. /your/file.jpeg
 }

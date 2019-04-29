@@ -52,6 +52,7 @@ const ::google::protobuf::uint32 TableStruct_file_5fdescription_2eproto::offsets
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::description::Description, headers_),
   PROTOBUF_FIELD_OFFSET(::description::Description, content_hash_),
+  PROTOBUF_FIELD_OFFSET(::description::Description, uri_),
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::description::Description)},
@@ -68,15 +69,16 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
 };
 
 const char descriptor_table_protodef_file_5fdescription_2eproto[] =
-  "\n\026file_description.proto\022\013description\"4\n"
+  "\n\026file_description.proto\022\013description\"A\n"
   "\013Description\022\017\n\007headers\030\001 \003(\t\022\024\n\014content"
-  "_hash\030\002 \001(\tB6Z4github.com/gladiusio/cach"
-  "e-file/proto/go/descriptionb\006proto3"
+  "_hash\030\002 \001(\t\022\013\n\003uri\030\003 \001(\tB6Z4github.com/g"
+  "ladiusio/cache-file/proto/go/description"
+  "b\006proto3"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_file_5fdescription_2eproto = {
   false, InitDefaults_file_5fdescription_2eproto, 
   descriptor_table_protodef_file_5fdescription_2eproto,
-  "file_description.proto", &assign_descriptors_table_file_5fdescription_2eproto, 155,
+  "file_description.proto", &assign_descriptors_table_file_5fdescription_2eproto, 168,
 };
 
 void AddDescriptors_file_5fdescription_2eproto() {
@@ -101,6 +103,7 @@ class Description::HasBitSetters {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Description::kHeadersFieldNumber;
 const int Description::kContentHashFieldNumber;
+const int Description::kUriFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Description::Description()
@@ -117,6 +120,10 @@ Description::Description(const Description& from)
   if (from.content_hash().size() > 0) {
     content_hash_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.content_hash_);
   }
+  uri_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.uri().size() > 0) {
+    uri_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.uri_);
+  }
   // @@protoc_insertion_point(copy_constructor:description.Description)
 }
 
@@ -124,6 +131,7 @@ void Description::SharedCtor() {
   ::google::protobuf::internal::InitSCC(
       &scc_info_Description_file_5fdescription_2eproto.base);
   content_hash_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  uri_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 Description::~Description() {
@@ -133,6 +141,7 @@ Description::~Description() {
 
 void Description::SharedDtor() {
   content_hash_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  uri_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void Description::SetCachedSize(int size) const {
@@ -152,6 +161,7 @@ void Description::Clear() {
 
   headers_.Clear();
   content_hash_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  uri_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
 
@@ -194,6 +204,22 @@ const char* Description::_InternalParse(const char* begin, const char* end, void
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         ctx->extra_parse_data().SetFieldName("description.Description.content_hash");
         object = msg->mutable_content_hash();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
+        break;
+      }
+      // string uri = 3;
+      case 3: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 26) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName("description.Description.uri");
+        object = msg->mutable_uri();
         if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
           parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
           goto string_till_end;
@@ -268,6 +294,21 @@ bool Description::MergePartialFromCodedStream(
         break;
       }
 
+      // string uri = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_uri()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->uri().data(), static_cast<int>(this->uri().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "description.Description.uri"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -315,6 +356,16 @@ void Description::SerializeWithCachedSizes(
       2, this->content_hash(), output);
   }
 
+  // string uri = 3;
+  if (this->uri().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->uri().data(), static_cast<int>(this->uri().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "description.Description.uri");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->uri(), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -347,6 +398,17 @@ void Description::SerializeWithCachedSizes(
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         2, this->content_hash(), target);
+  }
+
+  // string uri = 3;
+  if (this->uri().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->uri().data(), static_cast<int>(this->uri().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "description.Description.uri");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->uri(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -385,6 +447,13 @@ size_t Description::ByteSizeLong() const {
         this->content_hash());
   }
 
+  // string uri = 3;
+  if (this->uri().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->uri());
+  }
+
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -417,6 +486,10 @@ void Description::MergeFrom(const Description& from) {
 
     content_hash_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.content_hash_);
   }
+  if (from.uri().size() > 0) {
+
+    uri_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.uri_);
+  }
 }
 
 void Description::CopyFrom(const ::google::protobuf::Message& from) {
@@ -446,6 +519,8 @@ void Description::InternalSwap(Description* other) {
   _internal_metadata_.Swap(&other->_internal_metadata_);
   headers_.InternalSwap(CastToBase(&other->headers_));
   content_hash_.Swap(&other->content_hash_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  uri_.Swap(&other->uri_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
 }
 
